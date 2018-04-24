@@ -9,6 +9,7 @@ import com.mall.service.IUserService;
 import com.mall.util.MD5Util;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.support.incrementer.AbstractDataFieldMaxValueIncrementer;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -163,7 +164,7 @@ public class IUserServiceImpl implements IUserService {
     }
 
     @Override
-    public ServerResponse<User> getInfo(int id) {
+    public  ServerResponse<User> getInfo(int id) {
         User user = userMapper.selectByPrimaryKey(id);
         if(user == null){
             return ServerResponse.creatByErrorMessage("未找到用户");
@@ -171,4 +172,6 @@ public class IUserServiceImpl implements IUserService {
         user.setPassword(StringUtils.EMPTY);
         return ServerResponse.creatBySuccess(user);
     }
+
+
 }
