@@ -11,8 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.jws.soap.SOAPBinding;
-import javax.servlet.http.HttpSession;
 import java.util.UUID;
 
 @Service("iUserService")
@@ -162,5 +160,15 @@ public class IUserServiceImpl implements IUserService {
             return ServerResponse.creatBySuccess("更新成功",updateUser);
         }
         return ServerResponse.creatByErrorMessage("更新失败");
+    }
+
+    @Override
+    public ServerResponse<User> getInfo(int id) {
+        User user = userMapper.selectByPrimaryKey(id);
+        if(user == null){
+            return ServerResponse.creatByErrorMessage("未找到用户");
+        }
+        user.setPassword(StringUtils.EMPTY);
+        return ServerResponse.creatBySuccess(user);
     }
 }

@@ -21,4 +21,6 @@ public interface IUserService {
     ServerResponse<String> restPassword(User user , String oldPassword , String newPasswordNew);
 
     ServerResponse<User> updateUserMessage(User user);
+
+    ServerResponse<User> getInfo(int id);
 }

@@ -1,6 +1,7 @@
 package com.mall.controller.portal;
 
 import com.mall.common.Const;
+import com.mall.common.ResponseCode;
 import com.mall.common.ServerResponse;
 import com.mall.pojo.User;
 import com.mall.service.IUserService;
@@ -95,6 +96,16 @@ public class UserController {
             session.setAttribute(Const.CURRENT_USER,response.getData());
         }
         return response;
+    }
+    @RequestMapping(value = "getInfo.do",method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse<User> getInfo(HttpSession session){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return ServerResponse.creatByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"未登录重新强制登录，status=10");
+        }
+        int id = user.getId();
+        return iUserService.getInfo(id);
     }
 
 }
