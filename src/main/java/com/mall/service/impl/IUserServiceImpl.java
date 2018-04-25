@@ -1,6 +1,7 @@
 package com.mall.service.impl;
 
 import com.mall.common.Const;
+import com.mall.common.ResponseCode;
 import com.mall.common.ServerResponse;
 import com.mall.common.TokenCache;
 import com.mall.dao.UserMapper;
@@ -173,5 +174,11 @@ public class IUserServiceImpl implements IUserService {
         return ServerResponse.creatBySuccess(user);
     }
 
-
+    @Override
+    public ServerResponse<String> checkAdmin(User user) {
+        if(user.getRole()==Const.role.ROLE_MAIN){
+            return ServerResponse.creatBySuccess();
+        }
+        return ServerResponse.creatByError();
+    }
 }

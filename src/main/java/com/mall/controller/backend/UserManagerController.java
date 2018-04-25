@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping(value = "/manager/user/")
+@RequestMapping("/m/user/")
 public class UserManagerController {
 
     @Autowired
     private IUserService iUserService;
 
-    @RequestMapping(value = "login.do" ,method = RequestMethod.POST)
+    @RequestMapping(value = "login.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> login(String username, String password, HttpSession session){
         ServerResponse<User> response = iUserService.login(username, password);
