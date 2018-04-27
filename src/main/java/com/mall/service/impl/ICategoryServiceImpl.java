@@ -67,7 +67,7 @@ public class ICategoryServiceImpl implements ICategoryService {
      * @param
      * @return
      */
-    public ServerResponse selectAllChildByParent(Integer parentId){
+    public ServerResponse<List<Integer>> selectAllChildByParent(Integer parentId){
         Set<Category> categorySet = Sets.newHashSet();
         findChild(categorySet,parentId);
         List<Integer> categoryList = Lists.newArrayList();
